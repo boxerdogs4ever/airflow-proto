@@ -20,7 +20,7 @@ def init_db(cursor):
 if __name__ == '__main__':
 
     conn = psycopg2.connect(
-        database="MYDB", user='postgres', password='postgres', host='localhost', port='5432'
+        database="MYDB", user='postgres', password='postgres', host='localhost', port='5433'
     )
 
     conn.autocommit = True
