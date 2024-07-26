@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mydb:
+    image: postgres
+    restart: unless-stopped
+    container_name: mydb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=MYDB
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  myapi:
+    platform: linux/amd64
+    depends_on:
+      - mydb
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+
+volumes:
+  db:
+    driver: local
